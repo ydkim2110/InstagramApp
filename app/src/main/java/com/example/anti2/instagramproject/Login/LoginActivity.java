@@ -126,7 +126,6 @@ public class LoginActivity extends AppCompatActivity{
     /**
      * ------------------------------------ firebase ----------------------------------------
      */
-
     /**
      * setup the firebase auth object
      */
