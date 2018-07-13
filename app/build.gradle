@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.example.anti2.instagramproject"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.+'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //Design Library for Coordinator Layout and Toolbars
+    implementation 'com.android.support:design:26.+'
+
+    //BottomNavigationView Ex
+    implementation 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
+
+    //Circle ImageView
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    //Universial Image Loader
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+    //Firebase Authentication
+    implementation 'com.google.firebase:firebase-auth:11.6.0'
+
+
+}
+
+apply plugin: 'com.google.gms.google-services'

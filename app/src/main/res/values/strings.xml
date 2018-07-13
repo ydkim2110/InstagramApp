@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">InstagramProject</string>
+
+    <string name="edit_profile_fragment">Edit Profile</string>
+    <string name="sign_out_fragment">Sign Out</string>
+
+    <!-- firebase messages -->
+    <string name="auth_succeed">Succeed to Authentication</string>
+    <string name="auth_failed">Failed to Authentication</string>
+
+</resources>
