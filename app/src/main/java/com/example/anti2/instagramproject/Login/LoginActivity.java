@@ -87,16 +87,25 @@ public class LoginActivity extends AppCompatActivity{
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             Log.d(TAG, "signInWithEmailAndPassword - onComplete: "+task.isSuccessful());
+                            FirebaseUser user = mAuth.getCurrentUser();
 
                             if(task.isSuccessful()) {
-                                Log.d(TAG, "signInWithEmailAndPassword - successful login");
-                                Toast.makeText(mContext, getString(R.string.auth_succeed), Toast.LENGTH_SHORT).show();
-                                mProgressBar.setVisibility(View.INVISIBLE);
-                                mPleaseWait.setVisibility(View.INVISIBLE);
-
-                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                startActivity(intent);
-                                finish();
+                                try {
+                                    if(user.isEmailVerified()) {
+                                        Log.d(TAG, "onComplete: success. email is verified");
+                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(mContext, "Email is not verified \ncheck your email inbox",
+                                                Toast.LENGTH_SHORT).show();
+                                        mProgressBar.setVisibility(View.INVISIBLE);
+                                        mPleaseWait.setVisibility(View.INVISIBLE);
+                                        mAuth.signOut();
+                                    }
+                                } catch (NullPointerException e) {
+                                    Log.e(TAG, "onComplete: NullPointerExceiption " + e.getMessage());
+                                }
                             } else {
                                 Log.d(TAG, "signInWithEmailAndPassword - failed");
                                 Toast.makeText(mContext, getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
@@ -105,7 +114,6 @@ public class LoginActivity extends AppCompatActivity{
                             }
                         }
                     });
-
                 }
             }
         });
@@ -121,7 +129,6 @@ public class LoginActivity extends AppCompatActivity{
         });
 
     }
-
 
     /**
      * ------------------------------------ firebase ----------------------------------------

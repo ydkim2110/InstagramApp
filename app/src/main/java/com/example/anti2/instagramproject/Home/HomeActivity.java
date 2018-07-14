@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.anti2.instagramproject.Login.LoginActivity;
 import com.example.anti2.instagramproject.R;
@@ -31,6 +32,8 @@ public class HomeActivity extends AppCompatActivity {
     //firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+    private long lastTimeBackPressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,5 +137,15 @@ public class HomeActivity extends AppCompatActivity {
         if(mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(System.currentTimeMillis() - lastTimeBackPressed > 1500) {
+            finish();
+            return;
+        }
+        Toast.makeText(mContext, "뒤로가기 한 번 더 눌러 종료합니다.", Toast.LENGTH_SHORT).show();
+        lastTimeBackPressed = System.currentTimeMillis();
     }
 }
